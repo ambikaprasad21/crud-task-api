@@ -112,6 +112,7 @@ app.patch("/tasklists/:id", async function (req, res) {
 // Delete a tasklid by id
 app.delete("/tasklists/:id", async function (req, res) {
   try {
+    await Task.deleteMany({ _taskListId: req.params.id });
     const data = await TaskList.findByIdAndDelete(req.params.id);
     res.status(200).json({
       status: "success",
