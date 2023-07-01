@@ -19,7 +19,7 @@
   "homepage": "https://github.com/ambikaprasad21/crud-task-api#readme",
   "dependencies": {
     "express": "^4.18.2",
-    "mongoose": "^7.3.1"
+    "mongoose": "^5.13.19"
   },
   "devDependencies": {
     "nodemon": "^2.0.22"

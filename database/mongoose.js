@@ -7,6 +7,8 @@ mongoose
     "mongodb+srv://ambika:E2eqODUw6rtzsVxw@cluster0.ihobq4l.mongodb.net/todoapp?retryWrites=true&w=majority",
     {
       useNewUrlParser: true,
+      useCreateIndex: true,
+      useFindAndModify: false,
       useUnifiedTopology: true,
     }
   )
