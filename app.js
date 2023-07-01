@@ -122,6 +122,86 @@ app.delete("/tasklists/:id", async function (req, res) {
   }
 });
 
+// CRUD operation for task, a task should always belong to a task list.
+// http://localhost:8001/tasklist/:tasklistid/tasks --> this url gives all the task of a particular tasklist
+app.get("/tasklists/:tasklistid/tasks", async function (req, res) {
+  try {
+    const data = await Task.find({ _taskListId: req.params.tasklistid });
+    res.status(200).json({
+      status: "success",
+      data,
+    });
+  } catch (err) {
+    console.log("Error getting tasks from given tasklist id");
+  }
+});
+//create task inside a particular tasklist
+app.post("/tasklists/:tasklistid/tasks", async function (req, res) {
+  try {
+    const title = req.body.title;
+    const _taskListId = req.params.tasklistid;
+    const newTask = await Task.create({ title, _taskListId });
+    res.status(201).json({
+      status: "success",
+      data: newTask,
+    });
+  } catch (err) {
+    console.log("error creating task");
+  }
+});
+// http://localhost:8001/tasklist/:tasklistid/tasks/:taskid
+// get 1 task inside 1 tasklist
+app.get("/tasklists/:tasklistid/tasks/:taskid", async function (req, res) {
+  try {
+    const data = await Task.findOne({
+      _taskListId: req.params.tasklistid,
+      _id: req.params.taskid,
+    }); //find method works as filter so we can pass different check points to get data out of collection
+    res.status(200).json({
+      status: "success",
+      data,
+    });
+  } catch (err) {
+    console.log("Error getting tasks from given tasklist id");
+  }
+});
+
+// update 1 task belonging to 1 tasklist
+app.patch("/tasklists/:tasklistid/tasks/:taskid", async function (req, res) {
+  try {
+    const data = await Task.findByIdAndUpdate(
+      { _taskListId: req.params.tasklistid, _id: req.params.taskid },
+      req.body,
+      { new: true }
+    );
+
+    res.status(201).json({
+      status: "success",
+      data: {
+        data,
+      },
+    });
+  } catch (err) {
+    console.log("Error updating task ");
+  }
+});
+
+// Delete 1 task belonging to 1 tasklist
+app.delete("/tasklists/:tasklistid/tasks/:taskid", async function (req, res) {
+  try {
+    const data = await Task.findByIdAndDelete({
+      _taskListId: req.params.tasklistid,
+      _id: req.params.taskid,
+    });
+    res.status(201).json({
+      status: "success",
+      data,
+    });
+  } catch (err) {
+    console.log("Error in deleting task");
+  }
+});
+
 const port = 8001;
 app.listen(port, function () {
   console.log(`Server running on port ${port}`);
