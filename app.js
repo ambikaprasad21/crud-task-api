@@ -15,7 +15,7 @@ express will only allow request comming from port 8000 we need to tell express t
 
 app.use((req, res, next) => {
   // Website you wish to allow to connect
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
 
   // Request method you wish to allow
   res.setHeader(
