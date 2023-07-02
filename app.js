@@ -15,7 +15,7 @@ express will only allow request comming from port 8000 we need to tell express t
 
 app.use((req, res, next) => {
   // Website you wish to allow to connect
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
 
   // Request method you wish to allow
   res.setHeader(
@@ -112,6 +112,7 @@ app.patch("/tasklists/:id", async function (req, res) {
 // Delete a tasklid by id
 app.delete("/tasklists/:id", async function (req, res) {
   try {
+    await Task.deleteMany({ _taskListId: req.params.id });
     const data = await TaskList.findByIdAndDelete(req.params.id);
     res.status(200).json({
       status: "success",
