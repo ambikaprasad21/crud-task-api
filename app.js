@@ -66,10 +66,7 @@ app.get("/tasklists/:id", async function (req, res) {
     const task = await TaskList.find({ _id: id });
 
     res.status(200).json({
-      status: "success",
-      data: {
-        task,
-      },
+      task,
     });
   } catch (err) {
     console.log("Error occured geting task");
@@ -81,10 +78,7 @@ app.post("/tasklists", async function (req, res) {
   try {
     const newtasklist = await TaskList.create(req.body);
     res.status(201).json({
-      status: "success",
-      data: {
-        newtasklist,
-      },
+      newtasklist,
     });
   } catch (err) {
     console.log("Error in creating tasklist");
@@ -99,10 +93,7 @@ app.patch("/tasklists/:id", async function (req, res) {
     });
     // we need to use option inside findbyidandupadte and that is set to new: true so that exact change is send back to response.
     res.status(200).json({
-      status: "success",
-      data: {
-        tasklist,
-      },
+      tasklist,
     });
   } catch (err) {
     console.log("error in getting and updating tasklist");
@@ -129,7 +120,6 @@ app.get("/tasklists/:tasklistid/tasks", async function (req, res) {
   try {
     const data = await Task.find({ _taskListId: req.params.tasklistid });
     res.status(200).json({
-      status: "success",
       data,
     });
   } catch (err) {
@@ -159,7 +149,6 @@ app.get("/tasklists/:tasklistid/tasks/:taskid", async function (req, res) {
       _id: req.params.taskid,
     }); //find method works as filter so we can pass different check points to get data out of collection
     res.status(200).json({
-      status: "success",
       data,
     });
   } catch (err) {
