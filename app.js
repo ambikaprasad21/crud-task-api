@@ -173,10 +173,7 @@ app.delete("/tasklists/:tasklistid/tasks/:taskid", async function (req, res) {
       _taskListId: req.params.tasklistid,
       _id: req.params.taskid,
     });
-    res.status(201).json({
-      status: "success",
-      data,
-    });
+    res.status(201).send(data);
   } catch (err) {
     console.log("Error in deleting task");
   }
