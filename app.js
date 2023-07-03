@@ -18,7 +18,7 @@ app.use((req, res, next) => {
   // res.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://todo-ambika.netlify.app/"
+    "https://todo-ambika.netlify.app"
   );
 
   // Request method you wish to allow
